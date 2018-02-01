@@ -40,7 +40,7 @@ setup(
         'С ознакомиться документацией, а так же сообщить об '
         'ошибках можно на странице проекта '
         'http://github.com/scailer/django-paymaster/'
-    ).encode('utf8'),
+    ),
 
     requires=['django (>= 1.5)', 'pytz', 'simple_crypt'],
 
