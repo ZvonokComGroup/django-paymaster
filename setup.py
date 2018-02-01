@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# coding: utf-8
 
 from distutils.core import setup
 
@@ -30,16 +30,16 @@ setup(
     url='https://github.com/satels/django-paymaster/',
     download_url='https://github.com/satels/django-paymaster/zipball/master',
     license='MIT license',
-    description=(u'Application for integration PayMaster payment '
-                 u'system in Django projects.').encode('utf8'),
+    description=('Application for integration PayMaster payment '
+                 'system in Django projects.').encode('utf8'),
     long_description=(
-        u'Приложение для интеграции платежной системы PayMaster '
-        u'(http://paymaster.ru/) в проекты на Django. Реализовано '
-        u'только основное API PayMaster, согласно спецификации'
-        u'http://paymaster.ru/Partners/ru/docs/protocol/\n\n'
-        u'С ознакомиться документацией, а так же сообщить об '
-        u'ошибках можно на странице проекта '
-        u'http://github.com/scailer/django-paymaster/'
+        'Приложение для интеграции платежной системы PayMaster '
+        '(http://paymaster.ru/) в проекты на Django. Реализовано '
+        'только основное API PayMaster, согласно спецификации'
+        'http://paymaster.ru/Partners/ru/docs/protocol/\n\n'
+        'С ознакомиться документацией, а так же сообщить об '
+        'ошибках можно на странице проекта '
+        'http://github.com/scailer/django-paymaster/'
     ).encode('utf8'),
 
     requires=['django (>= 1.5)', 'pytz', 'simple_crypt'],
