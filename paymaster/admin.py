@@ -4,7 +4,7 @@ from django.contrib import admin
 from .models import Invoice
 
 
-@admin.site.register(Invoice)
+@admin.register(Invoice)
 class InvoiceAdmin(admin.ModelAdmin):
     list_display = ('number', 'amount', 'payment_method',
                     'payment_id', 'payment_date', 'creation_date')
