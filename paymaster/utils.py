@@ -14,7 +14,7 @@ from . import logger
 def decode_payer(enc):
     """ Декодирование пользователя-инициатора платежа """
     if enc is None:
-        return None
+        return
     try:
         _chr = ''.join(chr(int(enc[i:i + 3])) for i in range(0, len(enc), 3))
         pk = decrypt(settings.SECRET_KEY, _chr)
@@ -51,4 +51,4 @@ class CSRFExempt(object):
     @csrf_exempt
     def dispatch(self, *args, **kwargs):
         return super(CSRFExempt, self).dispatch(*args, **kwargs)
-    
+

@@ -9,13 +9,17 @@ for cmd in ('egg_info', 'develop'):
         from setuptools import setup
 
 import sys
-reload(sys).setdefaultencoding("UTF-8")
+
+is_py2 = sys.version_info < (3, 0, 0)
+
+if is_py2:
+    reload(sys).setdefaultencoding("UTF-8")
 
 setup(
     name='django-paymaster',
     version='0.2.0',
-    author='Dmitriy Vlasov',
-    author_email='scailer@lwr.pw',
+    author='Ivan Petuhov',
+    author_email='satels@gmail.com',
 
     include_package_data=True,
     packages=['paymaster'],
@@ -23,7 +27,8 @@ setup(
         'paymaster': ['migrations/*.py', 'templates/paymaster/*.html']
     },
 
-    url='https://github.com/scailer/django-paymaster/',
+    url='https://github.com/satels/django-paymaster/',
+    download_url='https://github.com/satels/django-paymaster/zipball/master',
     license='MIT license',
     description=(u'Application for integration PayMaster payment '
                  u'system in Django projects.').encode('utf8'),
@@ -46,9 +51,6 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Natural Language :: Russian',
     ),

@@ -4,6 +4,8 @@
 *.so
 
 # Packages
+*.wpr
+*.wpu
 *.egg
 *.egg-info
 dist
