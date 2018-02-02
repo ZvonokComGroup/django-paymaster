@@ -7,7 +7,7 @@ from simplecrypt import encrypt, decrypt, DecryptionException
 from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 
-from . import settings
+from django.conf import settings
 from . import logger
 
 import sys
@@ -22,24 +22,16 @@ def decode_payer(enc):
     if enc is None:
         return
     try:
-        _chr = ''.join(chr(int(enc[i:i + 3])) for i in range(0, len(enc), 3))
-        pk = decrypt(settings.SECRET_KEY, _chr)
-        return get_user_model().objects.get(pk=pk)
-
+        return get_user_model().objects.get(pk=enc)
     except DecryptionException:
         logger.warn(u'Payer decryption error')
-
     except get_user_model().DoesNotExist:
         logger.warn(u'Payer does not exist')
 
 
 def encode_payer(user):
     """ Кодирование пользователя-инициатора платежа """
-    secret = encrypt(settings.SECRET_KEY, unicode(user.pk))
-    if is_py2:
-        return u''.join(u'{0:03}'.format(ord(x)) for x in secret)
-    else:
-        return ''.join(u'{0:03}'.format(x) for x in secret)
+    return str(user.id)
 
 def number_generetor(view, form):
     """ Генератор номера платежа (по умолчанию) """
