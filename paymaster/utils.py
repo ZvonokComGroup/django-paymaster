@@ -10,6 +10,12 @@ from django.views.decorators.csrf import csrf_exempt
 from . import settings
 from . import logger
 
+import sys
+
+is_py2 = sys.version_info < (3, 0, 0)
+
+if not is_py2:
+    unicode = str
 
 def decode_payer(enc):
     """ Декодирование пользователя-инициатора платежа """
@@ -30,12 +36,18 @@ def decode_payer(enc):
 def encode_payer(user):
     """ Кодирование пользователя-инициатора платежа """
     secret = encrypt(settings.SECRET_KEY, unicode(user.pk))
-    return u''.join(u'{0:03}'.format(ord(x)) for x in secret)
-
+    if is_py2:
+        return u''.join(u'{0:03}'.format(ord(x)) for x in secret)
+    else:
+        return ''.join(u'{0:03}'.format(x) for x in secret)
 
 def number_generetor(view, form):
     """ Генератор номера платежа (по умолчанию) """
-    return u'{:%Y%m%d}-{:08x}'.format(datetime.now(), uuid4().get_fields()[0])
+    if is_py2:
+        uuid_fields = uuid4().get_fields()
+    else:
+        uuid_fields = uuid4().fields
+    return u'{:%Y%m%d}-{:08x}'.format(datetime.now(), uuid_fields[0])
 
 def get_request_data(request):
     """Получение данных, передаваемых с запросом"""

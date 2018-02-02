@@ -25,6 +25,16 @@ from . import signals
 from . import logger
 from . import utils
 
+import sys
+
+is_py2 = sys.version_info < (3, 0, 0)
+
+if not is_py2:
+    unicode = str
+    urlencode = urllib.parse.urlencode
+else:
+    urlencode = urllib.urlencode
+
 
 class InitialView(generic.FormView):
     """
@@ -156,7 +166,7 @@ class InitialView(generic.FormView):
         signals.invoice_init.send(sender=self, data=data)
 
         data = {k: v for k, v in data.items() if v}
-        return urllib.urlencode(data)
+        return urlencode(data)
 
 
 class ConfirmView(utils.CSRFExempt, generic.View):
