@@ -48,17 +48,17 @@ class Invoice(models.Model):
 
     def __unicode__(self):
         if self.is_paid():
-            return u'{0} {1}'.format(
+            return u'PayMaster: {0} {1}'.format(
                 self.number, self.payment_date.strftime('%Y-%m-%d'))
 
-        return u'{0} (no paid)'.format(self.number)
+        return u'PayMaster: {0} (no paid)'.format(self.number)
 
     def __str__(self):
         if self.is_paid():
-            return '{0} {1}'.format(
+            return 'PayMaster: {0} {1}'.format(
                 self.number, self.payment_date.strftime('%Y-%m-%d'))
 
-        return '{0} (no paid)'.format(self.number)
+        return 'PayMaster: {0} (no paid)'.format(self.number)
 
     class Meta:
         verbose_name = _(u'Счет')
