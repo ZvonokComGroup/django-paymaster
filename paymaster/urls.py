@@ -7,6 +7,8 @@ except ImportError:
 from . import views
 from . import forms
 
+app_name = 'paymaster'
+
 urlpatterns = [
     url(r'^init/', views.InitialView.as_view(
         form_class=forms.DefaultPaymentForm,
