@@ -16,7 +16,7 @@ project/urls.py
 ```python
 urlpatterns += i18n_patterns('',
     ...
-    url(r'^paymaster/', include('paymaster.urls', namespace='paymaster')),
+    url(r'^paymaster/', include('paymaster.urls')),
 )
 ```
 
@@ -264,7 +264,7 @@ def _fail(sender, data, invoice, **kwargs):
 Шаблон формы платежа, форма в контексте под именем "form".
 
 ```html
-<form action="{% url "paymaster:init" %}" method="post">
+<form action="{% url "paymaster-init" %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Send" />

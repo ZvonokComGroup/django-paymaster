@@ -1,4 +1,4 @@
-<form action="{% url "paymaster:init" %}" method="post">
+<form action="{% url "paymaster-init" %}" method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Send" />
