@@ -43,7 +43,7 @@ class TestAll(TestCase):
         assert ActivityLog.objects.filter(action='init').count() == 1
 
         data = QueryDict(response.get('Location').split('?')[-1]).dict()
-        data['LMI_PAYMENT_DESC'] = base64.decodestring(
+        data['LMI_PAYMENT_DESC'] = base64.decodebytes(
             data['LMI_PAYMENT_DESC_BASE64'])
         data['LMI_PAID_AMOUNT'] = data['LMI_PAYMENT_AMOUNT']
         data['LMI_PAID_CURRENCY'] = data['LMI_CURRENCY']
@@ -64,7 +64,7 @@ class TestAll(TestCase):
 
         hash_method = settings.PAYMASTER_HASH_METHOD
         _hash = getattr(hashlib, hash_method)(_line.encode('utf-8'))
-        _hash = base64.encodestring(_hash.digest()).replace('\n', '')
+        _hash = base64.encodebytes(_hash.digest()).replace('\n', '')
 
         response = self.client.post(reverse('paymaster-paid'), data)
         assert 200 == response.status_code
